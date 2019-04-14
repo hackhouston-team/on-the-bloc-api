@@ -34,7 +34,7 @@ public class NewBlocRequest {
         return messages;
     }
 
-    public void setMessage(List<NewMessageRequest> messages) {
+    public void setMessages(List<NewMessageRequest> messages) {
         this.messages = messages;
     }
 }

@@ -6,7 +6,7 @@ public class DocumentNotFoundException extends Exception {
     private String message;
 
     public DocumentNotFoundException(final String id, final Class type) {
-        this(id, type, String.format("%s document with id: %s could not be found", type, id));
+        this(id, type, String.format("%s document with id: %s could not be found", type.getSimpleName(), id));
     }
 
     public DocumentNotFoundException(final String id, final Class type, final String message) {

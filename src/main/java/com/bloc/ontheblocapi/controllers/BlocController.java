@@ -35,14 +35,14 @@ public class BlocController {
     }
 
     @PostMapping
-    public ResponseEntity<Bloc> createNewBlock(final @RequestBody @Valid NewBlocRequest newUserRequest) {
-        final Bloc newBloc = blocService.createNewBloc(newUserRequest.getName());
+    public ResponseEntity<Bloc> createNewBlock(final @RequestBody @Valid NewBlocRequest newBlockRequest) {
+        final Bloc newBloc = blocService.createNewBloc(newBlockRequest);
         return new ResponseEntity<>(newBloc, HttpStatus.OK);
     }
 
     @PostMapping("/{id}/message")
     public ResponseEntity<Message> createNewMessage(final @PathVariable String id,
-                                                    final @RequestBody NewMessageRequest message) throws DocumentNotFoundException {
+                                                    final @RequestBody @Valid NewMessageRequest message) throws DocumentNotFoundException {
         final Message newMessage = blocService.createNewMessage(id, message);
         return new ResponseEntity<>(newMessage, HttpStatus.OK);
     }
