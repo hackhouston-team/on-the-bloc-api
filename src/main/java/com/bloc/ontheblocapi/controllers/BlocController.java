@@ -5,7 +5,9 @@ import com.bloc.ontheblocapi.dto.NewMessageRequest;
 import com.bloc.ontheblocapi.exceptions.DocumentNotFoundException;
 import com.bloc.ontheblocapi.models.Bloc;
 import com.bloc.ontheblocapi.models.Message;
+import com.bloc.ontheblocapi.models.User;
 import com.bloc.ontheblocapi.services.BlocService;
+import com.bloc.ontheblocapi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +24,13 @@ import javax.validation.Valid;
 @RequestMapping("/blocs")
 public class BlocController {
     private final BlocService blocService;
+    private final UserService userService;
 
     @Autowired
-    public BlocController(final BlocService blocService) {
+    public BlocController(final BlocService blocService,
+                          final UserService userService) {
         this.blocService = blocService;
+        this.userService = userService;
     }
 
     @GetMapping("/{id}")
@@ -35,8 +40,9 @@ public class BlocController {
     }
 
     @PostMapping
-    public ResponseEntity<Bloc> createNewBlock(final @RequestBody @Valid NewBlocRequest newBlockRequest) {
+    public ResponseEntity<Bloc> createNewBlock(final @RequestBody @Valid NewBlocRequest newBlockRequest) throws DocumentNotFoundException {
         final Bloc newBloc = blocService.createNewBloc(newBlockRequest);
+        final User user = userService.addBlocById(newBloc.getCreatorId(), newBloc);
         return new ResponseEntity<>(newBloc, HttpStatus.OK);
     }
 
