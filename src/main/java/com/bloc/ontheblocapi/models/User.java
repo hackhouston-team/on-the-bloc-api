@@ -9,7 +9,7 @@ import java.util.List;
 public class User {
     @Id
     private String id;
-    private List<BlocIdentifiers> blocIdentifiers;
+    private List<BlocSummary> blocSummaries;
 
     public User(final String id) {
         this.id = id;
@@ -23,11 +23,11 @@ public class User {
         this.id = id;
     }
 
-    public List<BlocIdentifiers> getBlocIdentifiers() {
-        return blocIdentifiers;
+    public List<BlocSummary> getBlocSummaries() {
+        return blocSummaries;
     }
 
-    public void setBlocIdentifiers(List<BlocIdentifiers> blocIdentifiers) {
-        this.blocIdentifiers = blocIdentifiers;
+    public void setBlocSummaries(List<BlocSummary> blocSummaries) {
+        this.blocSummaries = blocSummaries;
     }
 }

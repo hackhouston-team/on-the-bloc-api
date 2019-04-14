@@ -4,7 +4,7 @@ import com.bloc.ontheblocapi.dto.NewBlocRequest;
 import com.bloc.ontheblocapi.dto.NewMessageRequest;
 import com.bloc.ontheblocapi.exceptions.DocumentNotFoundException;
 import com.bloc.ontheblocapi.models.Bloc;
-import com.bloc.ontheblocapi.models.BlocIdentifiers;
+import com.bloc.ontheblocapi.models.BlocSummary;
 import com.bloc.ontheblocapi.models.Message;
 import com.bloc.ontheblocapi.repositories.BlocRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,14 +39,14 @@ public class BlocService {
         return blocRepository.save(bloc);
     }
 
-    public List<BlocIdentifiers> getBlocIdentifiers(final List<String> ids) {
+    public List<BlocSummary> getBlocSummaries(final List<String> ids) {
         if (ids == null || ids.size() == 0) {
             return null;
         }
 
         final List<Bloc> blocs = (List<Bloc>) blocRepository.findAllById(ids);
         return blocs.stream()
-                .map(bloc -> conversionService.convert(bloc, BlocIdentifiers.class))
+                .map(bloc -> conversionService.convert(bloc, BlocSummary.class))
                 .collect(Collectors.toList());
     }
 

@@ -19,6 +19,7 @@ public class NewBlockRequestToBlocConverter implements Converter<NewBlocRequest,
     @Override
     public Bloc convert(final NewBlocRequest newBlocRequest) {
         final Bloc bloc = new Bloc(newBlocRequest.getName());
+        bloc.setCreatorId(newBlocRequest.getCreatorId());
 
         if (newBlocRequest.getMessages() != null && newBlocRequest.getMessages().size() > 0) {
             final List<Message> messages = newBlocRequest.getMessages().stream()

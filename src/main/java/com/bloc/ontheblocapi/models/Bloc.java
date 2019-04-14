@@ -9,11 +9,16 @@ import java.util.List;
 public class Bloc {
     @Id
     private String id;
+    private String creatorId;
     private String name;
     private List<Message> messages;
 
     public Bloc(final String name) {
         this.name = name;
+    }
+
+    public int getMessageCount() {
+        return messages != null ? messages.size() : 0;
     }
 
     public String getId() {
@@ -22,6 +27,14 @@ public class Bloc {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(String creatorId) {
+        this.creatorId = creatorId;
     }
 
     public String getName() {

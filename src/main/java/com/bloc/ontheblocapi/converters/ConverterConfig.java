@@ -25,7 +25,7 @@ public class ConverterConfig implements WebMvcConfigurer {
         registry.addConverter(new NewUserRequestToUserConverter(blocService));
         registry.addConverter(new NewMessageRequestToMessageConverter());
         registry.addConverter(new DocumentNotFoundExceptionToDocumentNotFoundResponseConverter());
-        registry.addConverter(new BlocToBlocIdentifiersConverter());
+        registry.addConverter(new BlocToBlocSummaryConverter());
         registry.addConverter(new NewBlockRequestToBlocConverter(conversionService));
     }
 }

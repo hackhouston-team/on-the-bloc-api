@@ -1,7 +1,7 @@
 package com.bloc.ontheblocapi.converters;
 
 import com.bloc.ontheblocapi.dto.NewUserRequest;
-import com.bloc.ontheblocapi.models.BlocIdentifiers;
+import com.bloc.ontheblocapi.models.BlocSummary;
 import com.bloc.ontheblocapi.models.User;
 import com.bloc.ontheblocapi.services.BlocService;
 import org.springframework.core.convert.converter.Converter;
@@ -18,8 +18,8 @@ public class NewUserRequestToUserConverter implements Converter<NewUserRequest, 
     @Override
     public User convert(final NewUserRequest newUserRequest) {
         final User user = new User(newUserRequest.getId());
-        final List<BlocIdentifiers> blocIdentifiers = blocService.getBlocIdentifiers(newUserRequest.getBlocIds());
-        user.setBlocIdentifiers(blocIdentifiers);
+        final List<BlocSummary> blocSummaries = blocService.getBlocSummaries(newUserRequest.getBlocIds());
+        user.setBlocSummaries(blocSummaries);
         return user;
     }
 }
