@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -52,7 +53,9 @@ public class BlocService {
     public Message createNewMessage(final String blocId, final NewMessageRequest newMessageRequest) throws DocumentNotFoundException {
         final Message message = conversionService.convert(newMessageRequest, Message.class);
         final Bloc bloc = getBlocById(blocId);
-        bloc.getMessages().add(message);
+        final List<Message> messages = bloc.getMessages() != null ? bloc.getMessages() : new ArrayList<>();
+        messages.add(message);
+        bloc.setMessages(messages);
         blocRepository.save(bloc);
         return message;
     }
