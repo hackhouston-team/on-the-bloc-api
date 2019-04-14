@@ -1,6 +1,9 @@
 package com.bloc.ontheblocapi.dto;
 
+import com.bloc.ontheblocapi.validation.UserIdExists;
+
 public class NewMessageRequest {
+    @UserIdExists
     private String creatorId;
     private String content;
 

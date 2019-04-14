@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/blocs")
 public class BlocController {
@@ -32,8 +34,8 @@ public class BlocController {
         return new ResponseEntity<>(bloc, HttpStatus.OK);
     }
 
-    @PostMapping("/{name}")
-    public ResponseEntity<Bloc> createNewBlock(final NewBlocRequest newUserRequest) {
+    @PostMapping
+    public ResponseEntity<Bloc> createNewBlock(final @RequestBody @Valid NewBlocRequest newUserRequest) {
         final Bloc newBloc = blocService.createNewBloc(newUserRequest.getName());
         return new ResponseEntity<>(newBloc, HttpStatus.OK);
     }

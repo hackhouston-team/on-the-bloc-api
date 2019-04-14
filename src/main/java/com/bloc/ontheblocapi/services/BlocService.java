@@ -3,12 +3,14 @@ package com.bloc.ontheblocapi.services;
 import com.bloc.ontheblocapi.dto.NewMessageRequest;
 import com.bloc.ontheblocapi.exceptions.DocumentNotFoundException;
 import com.bloc.ontheblocapi.models.Bloc;
+import com.bloc.ontheblocapi.models.BlocIdentifiers;
 import com.bloc.ontheblocapi.models.Message;
 import com.bloc.ontheblocapi.repositories.BlocRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,6 +34,10 @@ public class BlocService {
     public Bloc createNewBloc(final String name) {
         final Bloc bloc = new Bloc(name);
         return blocRepository.save(bloc);
+    }
+
+    public List<BlocIdentifiers> getBlocIdentifiers(final List<String> ids) {
+        return blocRepository.findBlockIdentifiersByIds(ids);
     }
 
     public Message createNewMessage(final String blocId, final NewMessageRequest newMessageRequest) throws DocumentNotFoundException {
